@@ -25,15 +25,12 @@ int menu() {
 }
 
 void uno () {
-    string funcion1 {"+x^2 +xy -10"};
-    string funcion2 {"+3xy^2 +y -50"};
-    Funcion fx1 {funcion1,2};
-    Funcion fx2 {funcion2,2};
+    vector<string> funcion {"+x^2 +xy -10" ,"+3xy^2 +y -50"};
+    vector<Funcion> fxy {{funcion[0]},{funcion[1]}};
 
-    cout << fx1.cadena() << " " << (fx1.cadena() == funcion1) << " " << fx1.derivar("y") << endl;
-    cout << fx2.cadena() << " " << (fx2.cadena() == funcion2) << " " << fx2.derivar("y") << endl;
-
-
+    for(int i = 0;i < (int) fxy.size();i++){
+        cout << fxy[i].cadena() << " " << (fxy[i].cadena() == funcion[i]) << " " << fxy[i].derivar("y") << endl;
+    }
 }
 
 void dos () {
@@ -42,39 +39,26 @@ void dos () {
 }
 
 void tres () {
-    string funcion1 {"+2x^2 -4x +y^2 +3z^2 +6z +2"};
-    string funcion2 {"+x^2 +y^2 -2y +2z^2 -5"};
-    string funcion3 {"+3x^2 -12x +y^2 -3z^2 +8"};
-    Funcion fx1 {funcion1,3};
-    Funcion fx2 {funcion2,3};
-    Funcion fx3 {funcion3,3};
+    vector<string> funcion {"+2x^2 -4x +y^2 +3z^2 +6z +2", "+x^2 +y^2 -2y +2z^2 -5", "+3x^2 -12x +y^2 -3z^2 +8"};
+    vector<Funcion> fxyz {{funcion[0]}, {funcion[1]}, {funcion[2]}};
 
-    cout << fx1.cadena() << " " << (fx1.cadena() == funcion1) << " " << fx1.derivar("z") << endl;
-    cout << fx2.cadena() << " " << (fx2.cadena() == funcion2) << " " << fx2.derivar("z") << endl;
-    cout << fx3.cadena() << " " << (fx3.cadena() == funcion3) << " " << fx3.derivar("z") << endl;
+    for(int i = 0;i < (int) fxyz.size();i++){
+        cout << fxyz[i].cadena() << " " << (fxyz[i].cadena() == funcion[i]) << " " << fxyz[i].derivar("y") << endl;
+    }
 }
 
 void cuatro () {
-    string funcion1 {"+x^2 -4x +y^2"};
-    string funcion2 {"+x^2 -x -12y +1"};
-    string funcion3 {"+3x^2 -12x +y^2 -3z^2 +8"};
-    Funcion fx1 {funcion1,3};
-    Funcion fx2 {funcion2,3};
-    Funcion fx3 {funcion3,3};
+    vector<string> funcion {"+x^2 -4x +y^2", "+x^2 -x -12y +1", "+3x^2 -12x +y^2 -3z^2 +8"};
+    vector<Funcion> fxyz {{funcion[0]}, {funcion[1]}, {funcion[2]}};
 
-    cout << fx1.cadena() << " " << (fx1.cadena() == funcion1) << " " << fx1.derivar("z") << endl;
-    cout << fx2.cadena() << " " << (fx2.cadena() == funcion2) << " " << fx2.derivar("z") << endl;
-    cout << fx3.cadena() << " " << (fx3.cadena() == funcion3) << " " << fx3.derivar("z") << endl;
+    for(int i = 0;i < (int) fxyz.size();i++){
+        cout << fxyz[i].cadena() << " " << (fxyz[i].cadena() == funcion[i]) << " " << fxyz[i].derivar("y") << endl;
+    }
 }
 
 int main() {
     int r {};
-    // string funcion {"x^2+xy-10"};
-    // int n {2};
-    // Funcion a {funcion, n};
-    // cout << boolalpha;
-    // cout << (funcion == a.cadena()) << " " << a.cadena() << endl << a.derivar("x")<< endl;
-cout<<boolalpha;
+    cout<<boolalpha;
     nombres();
     do{
         r = menu();

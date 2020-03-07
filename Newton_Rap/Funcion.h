@@ -12,7 +12,7 @@ class Funcion {
     double constante {};
 
     public:
-    Funcion (string funcion,int n) {
+    Funcion (string funcion) {
         int i {};
         int j {};
         vector<string> terminosAux {};
