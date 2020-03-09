@@ -6,6 +6,8 @@
 #ifndef MONOMIO_H
 #define MONOMIO_H
 
+using namespace std;
+
 class Monomio{
     private:
     double literal {};

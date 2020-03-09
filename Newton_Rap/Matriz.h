@@ -1,30 +1,19 @@
 #include <iostream>
 #include <vector>
 
-#include "Monomio.h"
-
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
+using namespace std;
+
 class Matriz {
-    private:
+    public:
     vector<vector<double>> matrizCuadrada {};
     vector<vector<double>> inversa {};
 
-    public:
     Matriz(vector<vector<double>> valorMatriz){
         matrizCuadrada = valorMatriz;
         inversaMatriz();
-        imprimir(inversa);
-    }
-
-    void imprimir(vector<vector<double>> matriz) {
-        for(int i = 0; i < (int) matriz.size() ;i++){
-            for(int j = 0; j < (int) matriz[i].size();j++)
-                cout << matriz[i][j] << " ";
-            cout << endl;
-        }
-        cout << endl;
     }
 
     void inversaMatriz(){

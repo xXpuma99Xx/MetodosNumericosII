@@ -6,6 +6,8 @@
 #ifndef FUNCION_H
 #define FUNCION_H
 
+using namespace std;
+
 class Funcion {
     private:
     vector<Monomio> terminos {};
@@ -89,10 +91,8 @@ class Funcion {
 
    double evaluar(vector<string> var, vector<double> valores){
         double resultado {};
-        int length {};
         
-        length = terminos.size();
-        for(int i = 0;i < length;i++){
+        for(int i = 0;i < (int) terminos.size();i++){
             resultado += terminos[i].evaluar(var,valores);
         }
         
