@@ -33,14 +33,14 @@ class Monomio{
         literal = literalNuevo;
     }
 
-    double evaluar(vector<double> valores){
+    double evaluar(vector<string> var, vector<double> valores){
         double resultado {1};
-        int length {};
-        
-        length = variables.size();
-        for(int i = 0;i < length;i++){
-            if(variables[i].getVariable() != "")
-                resultado *= variables[i].evaluar(valores[i]);
+
+        for(int i = 0;i < (int) var.size();i++){
+            for(int j = 0;j < (int) variables.size();j++){
+                if(var[i] == variables[j].getVariable())
+                    resultado *= variables[j].evaluar(valores[i]);
+            }
         }
         
         resultado *= literal;

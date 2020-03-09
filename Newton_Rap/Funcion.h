@@ -87,13 +87,13 @@ class Funcion {
         }
     }
 
-   double evaluar(vector<double> valoresVariables){
+   double evaluar(vector<string> var, vector<double> valores){
         double resultado {};
         int length {};
         
         length = terminos.size();
         for(int i = 0;i < length;i++){
-            resultado += terminos[i].evaluar(valoresVariables);
+            resultado += terminos[i].evaluar(var,valores);
         }
         
         resultado += constante;
