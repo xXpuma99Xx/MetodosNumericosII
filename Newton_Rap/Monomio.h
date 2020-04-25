@@ -1,111 +1,24 @@
-#include <iostream>
+#ifndef _MONOMIO_H_
+#define _MONOMIO_H_
+
+#include <string>
 #include <vector>
+#include "Variable.h"
 
-#include "VariableIndependiente.h"
+class Monomio {
+private:
+    std::string literal;
+    std::vector<Variable> variables;
 
-#ifndef MONOMIO_H
-#define MONOMIO_H
+public:
+    Monomio(std::string);
 
-using namespace std;
+    std::string get_literal();
+    void set_literal(std::string);
 
-class Monomio{
-    private:
-    double literal {};
-    vector<VariableIndependiente> variables;
-
-    public:
-    Monomio(double valorLiteral, vector<string> valorVariables, vector<int> valorExponentes){
-        int length {};
-
-        length = valorExponentes.size();
-        for(int i = 0; i < length; i++){
-            VariableIndependiente aux {valorVariables[i],valorExponentes[i]};
-
-            variables.push_back(aux);
-        }
-
-        literal = valorLiteral;
-    }
-
-    int getLiteral(){
-        return literal;
-    }
-
-    void setLiteral(int literalNuevo){
-        literal = literalNuevo;
-    }
-
-    double evaluar(vector<string> var, vector<double> valores){
-        double resultado {1};
-
-        for(int i = 0;i < (int) var.size();i++){
-            for(int j = 0;j < (int) variables.size();j++){
-                if(var[i] == variables[j].getVariable())
-                    resultado *= variables[j].evaluar(valores[i]);
-            }
-        }
-        
-        resultado *= literal;
-        return resultado;
-    }
-
-    string derivar(string var){
-        string cadena {};
-        int contador {};
-        double literalDerivada {};
-
-        for(int i = 0; i < (int) variables.size();i++){
-            if(variables[i].getVariable() == var){
-                VariableIndependiente derivada {var, (variables[i].getExponente() - 1)};
-
-                contador ++;
-                literalDerivada = literal * variables[i].getExponente();
-                cadena += derivada.cadena();
-            }
-            else 
-                cadena += variables[i].cadena();
-        }
-
-        if(literalDerivada == 1){
-            if(cadena.size() == 0)
-                cadena = "+1";
-            else 
-                cadena = "+" + cadena;
-        }
-        else if(literalDerivada == -1){
-            if(cadena.size() == 0)
-                cadena = "-1";
-            else 
-                cadena = "-" + cadena;
-        }
-        else if(literalDerivada < 0)
-            cadena = to_string((int) literalDerivada) + cadena;
-        else if(literalDerivada > 0)
-            cadena = "+" + to_string((int) literalDerivada) + cadena;
-        
-        if(contador == 0){
-            return "";
-        }
-        return cadena;
-    }
-
-    string cadena (){
-        string cadena {""};
-
-        if(literal == -1)
-            cadena += "-";
-        else if(literal == 1)
-            cadena += "+";
-        else if(literal < 0)
-            cadena += to_string((int) literal);
-        else if(literal > 0)
-            cadena += "+" + to_string((int) literal);
-        
-        for(int i = 0;i < (int) variables.size();i++)
-            cadena += variables[i].cadena();
-            
-        return cadena;
-    }
+    std::string get_cadena_monomio();
+	double evaluar_monomio(std::vector<char>, std::vector<double>);
+    
+    std::string derivar_monomio(char);
 };
-
 #endif
