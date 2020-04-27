@@ -1,7 +1,13 @@
+#include <sstream>
+#include <iomanip>
 #include "Funciones.hpp"
 
 std::string imprimir_numero(double numero){
-	std::string numero_string {std::to_string(numero)};
+	std::stringstream stream;
+
+	stream << std::fixed << std::setprecision(10) << numero;
+
+	std::string numero_string {stream.str()};
 
 	if(numero_string.size() > length)
 		numero_string = numero_string.substr(0,length);
@@ -76,19 +82,46 @@ std::string imprimir_vector(std::vector<double> array, std::string texto, bool e
 	return tabla + "+\n";
 }
 
-std::string imprimir_vectores(std::vector<double> x, std::vector<double> fx){
-	std::vector<std::string> nombres {"x","f(x)"};
+std::string imprimir_vectores(std::vector<std::vector<double>> vectores, std::vector<std::string> nombres){
 	std::string tabla {imprimir_headers(nombres)};
+	std::string linea;
+	std::string espacios;
+	size_t filas {vectores[0].size()};
+	size_t columnas {vectores.size()};
 
-	for(size_t i {};i < x.size();i++)
-		tabla = tabla + "|" + imprimir_numero(x[i]) + "|" + imprimir_numero(fx[i]) + "|\n";
-	for(size_t i {};i < nombres.size();i++){
-		tabla += "+";
-		for(size_t j {}; j < length;j++)
-			tabla += "-";
+	for(size_t j {}; j < length;j++){
+		linea += "-";
+		espacios += " ";
+	}
+	for(size_t i {};i < filas + 1;i++){
+		std::string fila;
+
+		for(size_t j{};j < columnas;j++){
+			if(i < vectores[j].size()){
+				if(j == 0||fila[fila.size()-1] == '-'||fila[fila.size()-1] == ' ')
+					fila = fila + "|" + imprimir_numero(vectores[j][i]) + "|";
+				else 
+					fila = fila + imprimir_numero(vectores[j][i]) + "|";
+			}else if(i == vectores[j].size()){
+				if(j == 0||fila[fila.size()-1] == '-'||fila[fila.size()-1] == ' ')
+					fila += "+" + linea;
+				else if(fila[fila.size()-1] == '|') 
+					fila += linea;
+				if(j == columnas - 1)
+					fila += "+";
+			} else if(i > vectores[j].size()){
+				if(fila[fila.size()-1] == '-') 
+					fila += "+" + espacios;
+				else if(fila[fila.size()-1] == '|') 
+					fila += espacios;
+				else if(fila[fila.size()-1] == ' ') 
+					fila += " " + espacios;
+			}
+		}
+		tabla = tabla + fila + "\n";
 	}
 	
-	return tabla + "+\n" ;
+	return tabla + "\n" ;
 }
 
 std::string imprimir_matriz(std::vector<std::vector<double>> m){

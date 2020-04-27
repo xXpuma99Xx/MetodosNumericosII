@@ -1,8 +1,11 @@
 #include "Matriz.hpp"
 #include "Funciones.hpp"
 
+Matriz::Matriz(){}
+
 Matriz::Matriz(std::vector<std::vector<double>> m, bool cuadrada)
 	: matriz{m} {
+		voltear();
 		if(cuadrada)
 			invertir();
 }
@@ -21,6 +24,10 @@ std::string Matriz::imprimir_tabla_matriz(){
 
 std::string Matriz::imprimir_tabla_inversa(){
 	return imprimir_matriz(inversa);
+}
+
+std::string Matriz::imprimir_tabla_transpuesta(){
+	return imprimir_matriz(transpuesta);
 }
 
 void Matriz::invertir(){
@@ -73,3 +80,34 @@ void Matriz::invertir(){
 	inversa = identidad;
 }
 
+void Matriz::voltear(){
+	size_t filas {matriz.size()};
+	size_t columnas {matriz[0].size()};
+	for(size_t i{};i < columnas;i++){
+		std::vector<double> fila;
+		for(size_t j{};j < filas;j++)
+			fila.push_back(matriz[j][i]);
+		transpuesta.push_back(fila);
+	}
+}
+
+std::vector<double> Matriz::vector_x_matriz(std::vector<double> v){
+	return v_x_m(matriz,v);
+}
+
+std::vector<double> Matriz::vector_x_inversa(std::vector<double> v){
+	return v_x_m(inversa,v);
+}
+
+std::vector<double> Matriz::v_x_m(std::vector<std::vector<double>> m,std::vector<double> v){
+	std::vector<double> resultante;
+
+	for(size_t i{};i < m.size();i++){
+		double celda {};
+		for(size_t j{};j < m[i].size();j++)
+			celda += v[j] * m[i][j];
+		resultante.push_back(celda);
+	}
+
+	return resultante;
+}

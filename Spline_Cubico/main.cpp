@@ -4,6 +4,7 @@
 #include "Diferencias_Divididas.hpp"
 #include "Funciones.hpp"
 #include "Matriz.hpp"
+#include "Spline_Cubico.hpp"
 
 void nombres();
 void borrar_pantalla();
@@ -18,6 +19,14 @@ bool numero(std::string);
 void lower(std::string &);
 
 int main() {
+	std::vector<double> x{426.69, 483.3, 497.81, 568.92, 995.61, 1422.3, 2133.45, 3555.75, 4266.9, 7111.5};
+	std::vector<double> fx{2468, 2482, 2483, 2498, 2584, 2672, 2811, 3094, 3236, 3807};
+	Spline_Cubico ejemplo {x,fx};
+	
+	std::cout << ejemplo.imprimir_todas() << std::endl;
+	std::cout << ejemplo.matriz_rectangular.imprimir_tabla_transpuesta() << std::endl;
+	std::cout << ejemplo.matriz_cuadrada.imprimir_tabla_matriz() << std::endl;
+	std::cout << ejemplo.matriz_cuadrada.imprimir_tabla_inversa() << std::endl;
 	//std::string respuesta;
 
 	//nombres();
@@ -49,7 +58,10 @@ void capturar_vectores() {
 	}
 	borrar_pantalla();
 	do {
-		std::cout << imprimir_vectores(x,fx) << std::endl;
+		std::vector<std::vector<double>> imprimir {x,fx};
+		std::vector<std::string> nombres {"x", "f(x)"};
+
+		std::cout << imprimir_vectores(imprimir, nombres) << std::endl;
 		aux = si_no("¿Estan correctos todos estos datos? [s/n]: ", false);
 		borrar_pantalla();
 		if (aux == "n") {

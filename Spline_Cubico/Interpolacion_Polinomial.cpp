@@ -21,7 +21,10 @@ std::vector<double> Interpolacion_Polinomial::get_fx() const{
 /* Metodos */
 
 std::string Interpolacion_Polinomial::imprimir_x_fx(){
-	return imprimir_vectores(x,fx);
+	std::vector<std::vector<double>> imprimir {x,fx};
+	std::vector<std::string> nombres {"x", "fx"};
+
+	return imprimir_vectores(imprimir,nombres);
 }
 
 std::string Interpolacion_Polinomial::imprimir_f(){
