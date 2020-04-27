@@ -8,9 +8,6 @@ Interpolacion_Polinomial::Interpolacion_Polinomial(std::vector<double> vect_x, s
 		ordenar();
 }
 
-Interpolacion_Polinomial::Interpolacion_Polinomial(std::vector<std::vector<double>> vectores):Interpolacion_Polinomial(vectores[0],vectores[1]){
-}
-
 /* Gets y Sets de Atributos */
 
 std::vector<double> Interpolacion_Polinomial::get_x() const{

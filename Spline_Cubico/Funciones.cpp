@@ -91,3 +91,24 @@ std::string imprimir_vectores(std::vector<double> x, std::vector<double> fx){
 	return tabla + "+\n" ;
 }
 
+std::string imprimir_matriz(std::vector<std::vector<double>> m){
+	std::string tabla;
+	std::string linea;
+
+	for(size_t i {};i < m[0].size();i++){
+		linea += "+";
+		for(size_t j {}; j < length;j++)
+			linea += "-";
+	}
+	linea += "+\n";
+	tabla += linea;
+	for(size_t i{};i < m.size();i++){
+		std::string fila {"|"};
+		for(size_t j{};j < m[i].size();j++)
+			fila += imprimir_numero(m[i][j]) + "|";
+		tabla += fila + "\n" + linea;
+	}
+
+	return tabla;
+}
+

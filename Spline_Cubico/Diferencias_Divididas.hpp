@@ -8,7 +8,6 @@ protected:
 	std::vector<std::vector<double>> tabla;
 
 public:
-	Diferencias_Divididas(std::vector<std::vector<double>>);
 	Diferencias_Divididas(std::vector<double>, std::vector<double>);
 
 	std::vector<std::vector<double>> get_tabla();

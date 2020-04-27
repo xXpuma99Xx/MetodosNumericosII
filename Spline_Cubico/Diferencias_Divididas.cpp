@@ -3,9 +3,6 @@
 
 /* Constructores */
 
-Diferencias_Divididas::Diferencias_Divididas(std::vector<std::vector<double>> vectores): Diferencias_Divididas(vectores[0], vectores[1]){
-}
-
 Diferencias_Divididas::Diferencias_Divididas(std::vector<double> vect_x, std::vector<double> vect_fx): Interpolacion_Polinomial(vect_x,vect_fx){
 	llenar_tabla();
 }

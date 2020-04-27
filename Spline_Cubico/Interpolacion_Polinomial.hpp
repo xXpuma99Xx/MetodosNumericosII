@@ -11,7 +11,6 @@ protected:
 
 public:
 	Interpolacion_Polinomial(std::vector<double>, std::vector<double>);
-	Interpolacion_Polinomial(std::vector<std::vector<double>>);
 	
 	std::vector<double> get_x() const;
 	std::vector<double> get_fx() const;

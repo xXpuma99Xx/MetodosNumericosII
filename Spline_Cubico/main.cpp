@@ -3,6 +3,7 @@
 #include <vector>
 #include "Diferencias_Divididas.hpp"
 #include "Funciones.hpp"
+#include "Matriz.hpp"
 
 void nombres();
 void borrar_pantalla();
@@ -17,13 +18,13 @@ bool numero(std::string);
 void lower(std::string &);
 
 int main() {
-	std::string respuesta;
+	//std::string respuesta;
 
-	nombres();
-	do {
-		capturar_vectores();
-		respuesta = si_no("¿Quieres repetir el programa? [s/n]: ");
-	} while (respuesta == "s");
+	//nombres();
+	//do {
+		//capturar_vectores();
+		//respuesta = si_no("¿Quieres repetir el programa? [s/n]: ");
+	//} while (respuesta == "s");
 
 	return 0;
 }
