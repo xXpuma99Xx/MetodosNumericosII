@@ -3,7 +3,6 @@
 #include <vector>
 #include "Diferencias_Divididas.hpp"
 #include "Funciones.hpp"
-#include "Matriz.hpp"
 #include "Spline_Cubico.hpp"
 
 void nombres();
@@ -19,21 +18,14 @@ bool numero(std::string);
 void lower(std::string &);
 
 int main() {
-	std::vector<double> x{426.69, 483.3, 497.81, 568.92, 995.61, 1422.3, 2133.45, 3555.75, 4266.9, 7111.5};
-	std::vector<double> fx{2468, 2482, 2483, 2498, 2584, 2672, 2811, 3094, 3236, 3807};
-	Spline_Cubico ejemplo {x,fx};
-	
-	std::cout << ejemplo.imprimir_todas() << std::endl;
-	std::cout << ejemplo.matriz_rectangular.imprimir_tabla_transpuesta() << std::endl;
-	std::cout << ejemplo.matriz_cuadrada.imprimir_tabla_matriz() << std::endl;
-	std::cout << ejemplo.matriz_cuadrada.imprimir_tabla_inversa() << std::endl;
-	//std::string respuesta;
+	std::string respuesta;
 
-	//nombres();
-	//do {
-		//capturar_vectores();
-		//respuesta = si_no("¿Quieres repetir el programa? [s/n]: ");
-	//} while (respuesta == "s");
+	nombres();
+	do {
+		capturar_vectores();
+		respuesta = si_no("¿Quieres repetir el programa? [s/n]: ");
+		borrar_pantalla();
+	} while (respuesta == "s");
 
 	return 0;
 }
@@ -58,8 +50,8 @@ void capturar_vectores() {
 	}
 	borrar_pantalla();
 	do {
-		std::vector<std::vector<double>> imprimir {x,fx};
-		std::vector<std::string> nombres {"x", "f(x)"};
+		std::vector<std::vector<double>> imprimir{x, fx};
+		std::vector<std::string> nombres{"x", "f(x)"};
 
 		std::cout << imprimir_vectores(imprimir, nombres) << std::endl;
 		aux = si_no("¿Estan correctos todos estos datos? [s/n]: ", false);
@@ -87,15 +79,16 @@ void capturar_vectores() {
 	} while (aux == "n");
 
 	do {
-		std::cout << std::endl << "1) Diferencias Divididas\n2) Ajuste de curvas\n\nElige una opcion: ";
+		std::cout << std::endl
+				  << "1) Diferencias Divididas\n2) Ajuste de curvas\n\nElige una opcion: ";
 		std::cin >> aux;
 		if (aux != "1" && aux != "2")
 			no_valido();
 	} while (aux != "1" && aux != "2");
-	if (aux== "1")
-		metodo_numerico_diferencias(x,fx);
+	if (aux == "1")
+		metodo_numerico_diferencias(x, fx);
 	else
-		std::cout << "aun no esta listo" << std::endl;
+		metodo_numerico_spline(x, fx);
 }
 
 void metodo_numerico_diferencias(std::vector<double> vect_x, std::vector<double> vect_fx) {
@@ -112,8 +105,18 @@ void metodo_numerico_diferencias(std::vector<double> vect_x, std::vector<double>
 	borrar_pantalla();
 }
 
-void metodo_numerico_spline(std::vector<double> vect_x, std::vector<double> vect_fx){
+void metodo_numerico_spline(std::vector<double> vect_x, std::vector<double> vect_fx) {
+	Spline_Cubico spline {vect_x, vect_fx};
+
+	borrar_pantalla();
+	std::cout << spline.imprimir_todas() << std::endl;
+	std::cout << spline.matriz_rectangular.imprimir_tabla_transpuesta() << std::endl;
+	std::cout << spline.matriz_cuadrada.imprimir_tabla_matriz() << std::endl;
+	std::cout << spline.matriz_cuadrada.imprimir_tabla_inversa() << std::endl;
+	std::cout << spline.coeficientes() << std::endl;
+
 }
+
 
 bool numero(std::string cadena) {
 	bool si_es{true};
@@ -146,13 +149,12 @@ void lower(std::string &texto) {
 void no_valido(bool borrar) {
 	if (borrar)
 		borrar_pantalla();
-	std::cout << "Ingreso una opcion no valida. Intente de nuevo" << std::endl
-			  << std::endl;
+	std::cout << "Ingreso una opcion no valida. Intente de nuevo" << std::endl << std::endl;
 }
 
 void borrar_pantalla() {
-	// system("cls");
-	system("clear");
+	system("cls");
+	// system("clear");
 }
 
 std::string mientras_no_sea_numero(std::string texto, bool borrar) {

@@ -6,7 +6,7 @@
 #include "Interpolacion_Polinomial.hpp"
 #include "Matriz.hpp"
 
-class Spline_Cubico: public Interpolacion_Polinomial {
+class Spline_Cubico : public Interpolacion_Polinomial {
 protected:
 	std::vector<double> hi;
 	std::vector<double> fi;
@@ -21,7 +21,7 @@ public:
 	Matriz matriz_cuadrada;
 
 	Spline_Cubico(std::vector<double>, std::vector<double>);
-	
+
 	std::vector<double> get_hi();
 	std::vector<double> get_fi();
 	std::vector<double> get_s();
@@ -29,7 +29,7 @@ public:
 	std::vector<double> get_a();
 	std::vector<double> get_b();
 	std::vector<double> get_c();
-	
+
 	std::string imprimir_hi();
 	std::string imprimir_fi();
 	std::string imprimir_s();
@@ -48,7 +48,8 @@ public:
 	void llenar_c();
 	void llenar_matriz_rectangular();
 	void llenar_matriz_cuadrada();
+
+	std::string coeficientes();
 };
 
 #endif
-

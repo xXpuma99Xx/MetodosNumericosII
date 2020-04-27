@@ -11,7 +11,7 @@ protected:
 
 public:
 	Interpolacion_Polinomial(std::vector<double>, std::vector<double>);
-	
+
 	std::vector<double> get_x() const;
 	std::vector<double> get_fx() const;
 
@@ -23,4 +23,3 @@ public:
 };
 
 #endif
-

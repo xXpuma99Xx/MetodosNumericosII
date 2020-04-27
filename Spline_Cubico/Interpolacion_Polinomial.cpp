@@ -4,42 +4,42 @@
 /* Constructores */
 
 Interpolacion_Polinomial::Interpolacion_Polinomial(std::vector<double> vect_x, std::vector<double> vect_fx)
-	:x{vect_x},fx{vect_fx}{
-		ordenar();
+	: x{vect_x}, fx{vect_fx} {
+	ordenar();
 }
 
 /* Gets y Sets de Atributos */
 
-std::vector<double> Interpolacion_Polinomial::get_x() const{
+std::vector<double> Interpolacion_Polinomial::get_x() const {
 	return x;
 }
 
-std::vector<double> Interpolacion_Polinomial::get_fx() const{
+std::vector<double> Interpolacion_Polinomial::get_fx() const {
 	return fx;
 }
 
 /* Metodos */
 
-std::string Interpolacion_Polinomial::imprimir_x_fx(){
-	std::vector<std::vector<double>> imprimir {x,fx};
-	std::vector<std::string> nombres {"x", "fx"};
+std::string Interpolacion_Polinomial::imprimir_x_fx() {
+	std::vector<std::vector<double>> imprimir{x, fx};
+	std::vector<std::string> nombres{"x", "fx"};
 
-	return imprimir_vectores(imprimir,nombres);
+	return imprimir_vectores(imprimir, nombres);
 }
 
-std::string Interpolacion_Polinomial::imprimir_f(){
-	return imprimir_vector(x,"x",false);
+std::string Interpolacion_Polinomial::imprimir_f() {
+	return imprimir_vector(x, "x", false);
 }
 
-std::string Interpolacion_Polinomial::imprimir_fx(){
-	return imprimir_vector(fx,"f(x)",false);
+std::string Interpolacion_Polinomial::imprimir_fx() {
+	return imprimir_vector(fx, "f(x)", false);
 }
 
-void Interpolacion_Polinomial::ordenar(){
-	for(size_t i {};i < x.size();i++){
-		for(size_t j {i};j < x.size();j++){
-			if(x[j] < x[i]){
-				double aux {};
+void Interpolacion_Polinomial::ordenar() {
+	for (size_t i{}; i < x.size(); i++) {
+		for (size_t j{i}; j < x.size(); j++) {
+			if (x[j] < x[i]) {
+				double aux{};
 
 				aux = x[j];
 				x[j] = x[i];
@@ -51,4 +51,3 @@ void Interpolacion_Polinomial::ordenar(){
 		}
 	}
 }
-

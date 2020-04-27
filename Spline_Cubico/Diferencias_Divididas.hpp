@@ -3,7 +3,7 @@
 
 #include "Interpolacion_Polinomial.hpp"
 
-class Diferencias_Divididas: public Interpolacion_Polinomial{
+class Diferencias_Divididas : public Interpolacion_Polinomial {
 protected:
 	std::vector<std::vector<double>> tabla;
 
@@ -19,4 +19,3 @@ public:
 };
 
 #endif
-
