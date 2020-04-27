@@ -1,14 +1,21 @@
 #include <iostream>
 #include "Diferencias_Divididas.h"
 
-Diferencias_Divididas::Diferencias_Divididas(std::vector<std::vector<double>> vectores){
-	x = vectores[0];
-	fx = vectores[1];
+/*
+ * Constructores
+*/
+Diferencias_Divididas::Diferencias_Divididas(std::vector<std::vector<double>> vectores): Diferencias_Divididas(vectores[0], vectores[1]){
+}
+
+Diferencias_Divididas::Diferencias_Divididas(std::vector<double> x, std::vector<double> fx): x{x}, fx{fx}{
 
 	ordenar();
 	llenar_tabla();
 }
 
+/*
+ * Gets y Sets de Atrivutos
+*/
 double Diferencias_Divididas::get_x(size_t i){
 	return x[i];
 }
@@ -37,6 +44,9 @@ std::vector<std::vector<double>> Diferencias_Divididas::get_tabla(){
 	return tabla;
 }
 
+/*
+ * Metodos
+*/
 void Diferencias_Divididas::ordenar(){
 	for(size_t i {};i < x.size();i++){
 		for(size_t j {i};j < x.size();j++){
@@ -70,7 +80,7 @@ void Diferencias_Divididas::llenar_tabla(){
 	}
 }
 
-std::vector<double> Diferencias_Divididas::encontrar_numero(double numero){
+std::vector<double> Diferencias_Divididas::potencias(double numero){
 	std::vector<double> p;
 
 	for(size_t i {};i < x.size() - 1;i++){

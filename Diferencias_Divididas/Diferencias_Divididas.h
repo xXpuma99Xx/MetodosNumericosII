@@ -12,6 +12,7 @@ private:
 
 public:
 	Diferencias_Divididas(std::vector<std::vector<double>>);
+	Diferencias_Divididas(std::vector<double>, std::vector<double>);
 
 	double get_x(size_t);
 	void set_x(size_t,double);
@@ -25,6 +26,6 @@ public:
 
 	void ordenar();
 	void llenar_tabla();
-	std::vector<double> encontrar_numero(double);
+	std::vector<double> potencias(double);
 };
 #endif

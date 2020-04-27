@@ -8,13 +8,14 @@ const double length = 10;
 
 void metodo_numerico();
 void nombres();
-void borar_pantalla();
+void borrar_pantalla();
 void no_valido(bool borrar = true);
 
 std::vector<std::vector<double>> capturar_vectores();
 std::string imprimir_numero(double);
 std::string mientras_no_sea_numero(std::string , bool borrar = true);
 std::string si_no(std::string , bool borrar = true);
+int cambiar_numero(const std::vector<double> &, std::string);
 
 bool numero(std::string);
 void lower(std::string &);
@@ -51,14 +52,14 @@ void metodo_numerico(){
 	std::string respuesta;
 
 	do{
-		borar_pantalla();
+		borrar_pantalla();
 		imprimir_vectores(ejemplo.get_vector_x(),ejemplo.get_vector_fx());
 		imprimir_tabla(ejemplo.get_tabla());
-		imprimir_p(ejemplo.encontrar_numero(stod(mientras_no_sea_numero("Inserte un numero para encontrar su valor: "))));
+		imprimir_p(ejemplo.potencias(stod(mientras_no_sea_numero("Inserte un numero para encontrar su valor: "))));
 		
-		respuesta = si_no("¿Quieres bucar el valor de otro número? [s/n]: ");
+		respuesta = si_no("¿Quieres bucar otro número? [s/n]: ");
 	}while(respuesta == "s");
-	borar_pantalla();
+	borrar_pantalla();
 }
 
 std::vector<std::vector<double>> capturar_vectores(){
@@ -67,26 +68,26 @@ std::vector<std::vector<double>> capturar_vectores(){
 	std::vector<double> x;
 	std::vector<double> fx;
 
-	borar_pantalla();
+	borrar_pantalla();
 	do{
 		n = stoi(mientras_no_sea_numero("¿Cuántos valores desea insertar? "));
 		if(n < 1)
 			no_valido();
 	}while(n < 1);
-	borar_pantalla();
+	borrar_pantalla();
 	for(int i {};i < n;i++){
 		std::string sub_indice {mientras_no_sea_numero("x[" + std::to_string(i) + "]: ")};
 		x.push_back(stod(sub_indice));
 		fx.push_back(stod(mientras_no_sea_numero("f(" + sub_indice + ") = ")));
 	}
-	borar_pantalla();
+	borrar_pantalla();
 	do{
 		imprimir_vectores(x,fx);
-		aux = si_no("¿Estan correctos todos estos datos? [s/n]: ");
+		aux = si_no("¿Estan correctos todos estos datos? [s/n]: ",false);
+		borrar_pantalla();
 		if(aux == "n"){
 			std::string aux2;
 			int opcion {};
-			int maximo {static_cast<int>(x.size()) - 1};
 
 			do{
 				std::cout << "1)Cambiar un dato de x\n2)Cambiar un dato de f(x)\n\nElige una opcion: ";
@@ -94,23 +95,13 @@ std::vector<std::vector<double>> capturar_vectores(){
 				if(aux2 != "1"&&aux2 != "2")
 					no_valido();
 			}while(aux2 != "1"&&aux2 != "2");
-			borar_pantalla();
+			borrar_pantalla();
 			if(aux2 == "1"){
-				do{
-					imprimir_array(x, "x");
-					opcion = stoi(mientras_no_sea_numero("\nElige una opcion: ",false));
-					if(opcion < 0||opcion > maximo)
-						no_valido();
-				}while(opcion < 0||opcion > maximo);
+				opcion = cambiar_numero(x,"x");
 				x[opcion] = stod(mientras_no_sea_numero("x[" + std::to_string(opcion) + "]: "));
 			}
 			if(aux2 == "2"){
-				do{
-					imprimir_array(fx, "f(x)");
-					opcion = stoi(mientras_no_sea_numero("\nElige una opcion: ", false));
-					if(opcion < 0||opcion > maximo)
-						no_valido();
-				}while(opcion < 0||opcion > maximo);
+				opcion = cambiar_numero(fx,"f(x)");
 				fx[opcion] = stod(mientras_no_sea_numero("f(" + std::to_string(x[opcion]) + ") = "));
 			}
 		}
@@ -271,13 +262,13 @@ void lower(std::string &texto){
 
 void no_valido(bool borrar){
 	if(borrar)
-		borar_pantalla();
+		borrar_pantalla();
 	std::cout << "Ingreso una opcion no valida. Intente de nuevo" << std::endl << std::endl;
 }
 
-void borar_pantalla(){
-	system("cls");
-	// system("clear");
+void borrar_pantalla(){
+	// system("cls");
+	system("clear");
 }
 
 std::string mientras_no_sea_numero(std::string texto, bool borrar){
@@ -305,9 +296,22 @@ std::string si_no(std::string texto, bool borrar){
 	return respuesta;
 }
 
+int cambiar_numero(const std::vector<double> &vect, std::string nombre){
+	int opcion {};
+	int maximo {static_cast<int>(vect.size())};
+	do{ 
+		imprimir_array(vect, nombre);
+		opcion = stoi(mientras_no_sea_numero("\nElige una opcion: ", false));
+		if(opcion < 0||opcion >= maximo)
+			no_valido();
+	}while(opcion < 0||opcion >= maximo);
+	return opcion;
+}
+
 void nombres () {
-    std::cout << "Gómez González Astrid" << std::endl;
-    std::cout << "Márquez Rosas Lemuel Helon" << std::endl;
-    std::cout << "Navarro Ramos Karen" << std::endl;
+	borrar_pantalla();
+  std::cout << "Gómez González Astrid" << std::endl;
+  std::cout << "Márquez Rosas Lemuel Helon" << std::endl;
+  std::cout << "Navarro Ramos Karen" << std::endl;
 	std::cout << "Pérez Romero Jonathan " << std::endl;
 }
