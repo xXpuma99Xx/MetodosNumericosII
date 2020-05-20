@@ -117,7 +117,6 @@ void metodo_numerico_spline(std::vector<double> vect_x, std::vector<double> vect
 
 }
 
-
 bool numero(std::string cadena) {
 	bool si_es{true};
 	bool punto{false};
