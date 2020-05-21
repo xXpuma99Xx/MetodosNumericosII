@@ -6,7 +6,7 @@
 #include "Spline_Cubico.hpp"
 
 std::vector<std::vector<double>> capturar_vectores();
-void menu_metodos(std::vector<double> x, std::vector<double> fx);
+void interpolacion_ajuste();
 int cambiar_numero(const std::vector<double> &vect, std::string nombre);
 
 int imprimir_menu(std::vector<std::string> opciones);
@@ -34,15 +34,23 @@ T mientras_no_sea_numero(std::string texto, bool borrar = true) {
 	return static_cast<T>(stod(respuesta));
 }
 
-
 int main(){
+	nombres();
 	bool repetir {};
-	std::vector<std::vector<double>> vectores;
+	std::vector<std::string> opciones {"Interpolación y Ajuste de Curva","Diferenciacion","Integracion"};
+	int r {imprimir_menu(opciones)};
 
+	borrar_pantalla();
 	do{
-		vectores = capturar_vectores();
-		menu_metodos(vectores[0],vectores[1]);
-		repetir = si_no("¿Desea repetir?[s/n]: ");
+		switch(r){
+			case 1: interpolacion_ajuste();
+				break;
+			case 2: std::cout << "aun no listo";
+				break;
+			case 3: std::cout << "aun no listo";
+				break;
+		}
+		repetir = si_no("Desea repetir el programa?[s/n]: ");
 	}while(repetir);
 	
 	return 0;
@@ -51,8 +59,9 @@ int main(){
 std::vector<std::vector<double>> capturar_vectores() {
 	std::vector<double> x;
 	std::vector<double> fx;
+	std::string menu {"Cuantos valores desea insertar? "};
+	bool seguir {};
 	int n{};
-	std::string menu {"¿Cuantos valores desea insertar? "};
 	
 	do {
 		n = mientras_no_sea_numero<int>(menu);
@@ -69,12 +78,11 @@ std::vector<std::vector<double>> capturar_vectores() {
 		std::cout << std::endl;
 	}
 	borrar_pantalla();
-	bool seguir {};
 	do {
 		std::vector<std::vector<double>> imprimir{x, fx};
 		std::vector<std::string> nombres{"x", "f(x)"};
 
-		menu = imprimir_vectores(imprimir, nombres) + "¿Estan correctos todos estos datos? [s/n]: ";
+		menu = imprimir_vectores(imprimir, nombres) + "Estan correctos todos estos datos? [s/n]: ";
 		seguir = si_no(menu);
 		borrar_pantalla();
 		if (!seguir) {
@@ -91,6 +99,7 @@ std::vector<std::vector<double>> capturar_vectores() {
 				opcion = cambiar_numero(fx, "f(x)");
 				fx[opcion] = mientras_no_sea_numero<double>("f(" + std::to_string(x[opcion]) + ") = ");
 			}
+			borrar_pantalla();
 		}
 	} while (!seguir);
 
@@ -98,16 +107,15 @@ std::vector<std::vector<double>> capturar_vectores() {
 	return vecotres;
 }
 
-void menu_metodos(std::vector<double> x, std::vector<double> fx) {
-	std::vector<std::string> opciones {"Diferencias Divididas","Ajuste de curvas"};
+void interpolacion_ajuste() {
+	std::vector<std::vector<double>> vectores {capturar_vectores()};
+	std::vector<std::string> opciones {"Diferencias Divididas","Spline Cubico"};
 	int r {imprimir_menu(opciones)};
 
 	switch(r){
-		case 1: metodo_diferencias_divididas(x, fx);
+		case 1: metodo_diferencias_divididas(vectores[0],vectores[1]);
 			break;
-		case 2: metodo_spline_cubico(x, fx);
-			break;
-		case 3:
+		case 2: metodo_spline_cubico(vectores[0],vectores[1]);
 			break;
 	}
 }
@@ -120,14 +128,13 @@ void metodo_diferencias_divididas(std::vector<double> vect_x, std::vector<double
 		std::cout << diferencias.imprimir_tabla() << std::endl;
 		std::cout << diferencias.imprimir_potencias(mientras_no_sea_numero<double>("Inserte un numero para encontrar su valor: "));
 
-		repetir = si_no("¿Quieres bucar otro número? [s/n]: ");
+		repetir = si_no("Desea repetir el metodo de diferencias divididas? [s/n]: ");
 	} while (repetir);
 }
 
 void metodo_spline_cubico(std::vector<double> vect_x, std::vector<double> vect_fx) {
 	Spline_Cubico spline {vect_x, vect_fx};
 
-	borrar_pantalla();
 	std::cout << spline.imprimir_todas() << std::endl;
 	std::cout << spline.matriz_rectangular.imprimir_tabla_transpuesta() << std::endl;
 	std::cout << spline.matriz_cuadrada.imprimir_tabla_matriz() << std::endl;
@@ -211,3 +218,10 @@ void borrar_pantalla() {
 	system("clear");
 }
 
+void nombres() {
+	borrar_pantalla();
+	std::cout << "Gómez González Astrid" << std::endl;
+	std::cout << "Márquez Rosas Lemuel Helon" << std::endl;
+	std::cout << "Navarro Ramos Karen" << std::endl;
+	std::cout << "Pérez Romero Jonathan\n\n" << std::endl;
+}

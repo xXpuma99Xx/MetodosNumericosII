@@ -114,7 +114,6 @@ void metodo_numerico_spline(std::vector<double> vect_x, std::vector<double> vect
 	std::cout << spline.matriz_cuadrada.imprimir_tabla_matriz() << std::endl;
 	std::cout << spline.matriz_cuadrada.imprimir_tabla_inversa() << std::endl;
 	std::cout << spline.coeficientes() << std::endl;
-
 }
 
 bool numero(std::string cadena) {
