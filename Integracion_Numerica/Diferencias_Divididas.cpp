@@ -3,24 +3,29 @@
 
 /* Constructores */
 
-Diferencias_Divididas::Diferencias_Divididas(std::vector<double> vect_x, std::vector<double> vect_fx) : Interpolacion_Polinomial(vect_x, vect_fx) {
+Diferencias_Divididas::Diferencias_Divididas(std::vector<double> vect_x, std::vector<double> vect_fx) : Interpolacion_Polinomial(vect_x, vect_fx)
+{
 	llenar_tabla();
 }
 
 /* Gets y Sets de Atributos */
 
-std::vector<std::vector<double>> Diferencias_Divididas::get_tabla() {
+std::vector<std::vector<double>> Diferencias_Divididas::get_tabla()
+{
 	return tabla;
 }
 
 /* Metodos */
 
-void Diferencias_Divididas::llenar_tabla() {
-	for (size_t i{}; i < x.size() - 1; i++) {
+void Diferencias_Divididas::llenar_tabla()
+{
+	for (size_t i{}; i < x.size() - 1; i++)
+	{
 		std::vector<double> aux;
 		double valor{};
 
-		for (size_t j{}; j < x.size() - i - 1; j++) {
+		for (size_t j{}; j < x.size() - i - 1; j++)
+		{
 			if (i == 0)
 				valor = (fx[j + 1] - fx[j]) / (x[j + 1] - x[j]);
 			else
@@ -31,14 +36,17 @@ void Diferencias_Divididas::llenar_tabla() {
 	}
 }
 
-std::vector<double> Diferencias_Divididas::potencias(double numero) {
+std::vector<double> Diferencias_Divididas::potencias(double numero)
+{
 	std::vector<double> p;
 
-	for (size_t i{}; i < x.size() - 1; i++) {
+	for (size_t i{}; i < x.size() - 1; i++)
+	{
 		double aux;
 		if (i == 0)
 			aux = fx[0] + (tabla[0][0] * (numero - x[0]));
-		else {
+		else
+		{
 			aux = tabla[i][0];
 			for (size_t j{}; j <= i; j++)
 				aux *= (numero - x[j]);
@@ -49,7 +57,8 @@ std::vector<double> Diferencias_Divididas::potencias(double numero) {
 	return p;
 }
 
-std::string Diferencias_Divididas::imprimir_potencias(double numero) {
+std::string Diferencias_Divididas::imprimir_potencias(double numero)
+{
 	std::vector<double> vect_potencias{potencias(numero)};
 	std::vector<std::string> nombres;
 
@@ -59,12 +68,14 @@ std::string Diferencias_Divididas::imprimir_potencias(double numero) {
 	std::string tabla_potencias{imprimir_headers(nombres)};
 	double aux{};
 
-	for (size_t i{}; i < vect_potencias.size(); i++) {
+	for (size_t i{}; i < vect_potencias.size(); i++)
+	{
 		aux += vect_potencias[i];
 		tabla_potencias = tabla_potencias + "|" + imprimir_numero(aux);
 	}
 	tabla_potencias += "|\n";
-	for (size_t i{}; i < nombres.size(); i++) {
+	for (size_t i{}; i < nombres.size(); i++)
+	{
 		tabla_potencias += "+";
 		for (double j{}; j < length; j++)
 			tabla_potencias += "-";
@@ -73,7 +84,8 @@ std::string Diferencias_Divididas::imprimir_potencias(double numero) {
 	return tabla_potencias + "+\n";
 }
 
-std::string Diferencias_Divididas::imprimir_tabla() {
+std::string Diferencias_Divididas::imprimir_tabla()
+{
 	std::vector<std::string> nombres{"x", "f(x)"};
 	std::string linea;
 
@@ -86,9 +98,11 @@ std::string Diferencias_Divididas::imprimir_tabla() {
 		linea += "-";
 	linea += "+";
 
-	for (size_t i{}; i < x.size(); i++) {
+	for (size_t i{}; i < x.size(); i++)
+	{
 		tabla_completa = tabla_completa + "|" + imprimir_numero(x[i]) + "|" + imprimir_numero(fx[i]);
-		for (size_t j{}; j < tabla.size() - i; j++) {
+		for (size_t j{}; j < tabla.size() - i; j++)
+		{
 			tabla_completa = tabla_completa + "|" + imprimir_numero(tabla[j][i]);
 		}
 		if (i > 0)
@@ -97,4 +111,5 @@ std::string Diferencias_Divididas::imprimir_tabla() {
 			tabla_completa += "|\n";
 	}
 	tabla_completa = tabla_completa + "+" + linea + linea + "\n";
-return tabla_completa; }
+	return tabla_completa;
+}

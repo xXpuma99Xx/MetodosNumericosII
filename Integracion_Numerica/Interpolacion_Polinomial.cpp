@@ -5,7 +5,7 @@
 
 Interpolacion_Polinomial::Interpolacion_Polinomial(std::vector<double> vect_x, std::vector<double> vect_fx)
 	: x{vect_x}, fx{vect_fx} {
-	ordenar();
+	ordenar_vectores(x,fx);
 }
 
 /* Gets y Sets de Atributos */
@@ -33,21 +33,4 @@ std::string Interpolacion_Polinomial::imprimir_f() {
 
 std::string Interpolacion_Polinomial::imprimir_fx() {
 	return imprimir_vector(fx, "f(x)", false);
-}
-
-void Interpolacion_Polinomial::ordenar() {
-	for (size_t i{}; i < x.size(); i++) {
-		for (size_t j{i}; j < x.size(); j++) {
-			if (x[j] < x[i]) {
-				double aux{};
-
-				aux = x[j];
-				x[j] = x[i];
-				x[i] = aux;
-				aux = fx[j];
-				fx[j] = fx[i];
-				fx[i] = aux;
-			}
-		}
-	}
 }

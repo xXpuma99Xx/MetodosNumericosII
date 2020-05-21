@@ -6,7 +6,8 @@
 #include "Interpolacion_Polinomial.hpp"
 #include "Matriz.hpp"
 
-class Spline_Cubico : public Interpolacion_Polinomial {
+class Spline_Cubico : public Interpolacion_Polinomial
+{
 protected:
 	std::vector<double> hi;
 	std::vector<double> fi;

@@ -30,7 +30,7 @@ std::string imprimir_numero(double numero, bool espacios) {
 	}
 	if (numero_string[numero_string.size() - 1] == '.')
 		numero_string.erase(numero_string.size() - 1);
-	if (numero_string.size() < length&&espacios) {
+	if (numero_string.size() < length && espacios) {
 		for (size_t i{numero_string.size()}; i < length; i++)
 			numero_string += " ";
 	}
@@ -146,4 +146,21 @@ std::string imprimir_matriz(std::vector<std::vector<double>> m) {
 	}
 
 	return tabla;
+}
+
+void ordenar_vectores(std::vector<double> &x, std::vector<double> &fx) {
+	for (size_t i{}; i < x.size(); i++) {
+		for (size_t j{i}; j < x.size(); j++) {
+			if (x[j] < x[i]) {
+				double aux{};
+
+				aux = x[j];
+				x[j] = x[i];
+				x[i] = aux;
+				aux = fx[j];
+				fx[j] = fx[i];
+				fx[i] = aux;
+			}
+		}
+	}
 }

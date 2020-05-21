@@ -19,7 +19,6 @@ public:
 	std::string imprimir_f();
 	std::string imprimir_fx();
 
-	void ordenar();
 };
 
 #endif
