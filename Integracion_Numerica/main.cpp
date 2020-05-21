@@ -241,6 +241,9 @@ void metodo_spline_cubico(std::vector<double> vect_x, std::vector<double> vect_f
 }
 
 void metodo_inegracion(std::vector<double> vect_x, std::vector<double> vect_fx,double h) {
+	Integracion integracion {vect_x, vect_fx, h};
+
+	std::cout << integracion.imprimir_todo() << std::endl;
 }
 
 
