@@ -257,13 +257,10 @@ double obtener_h(std::vector<double> x){
 	return x[0] - x[1];
 }
 
-bool si_no(std::string texto)
-{
+bool si_no(std::string texto) {
 	std::string respuesta;
 
-	do
-	{
-		std::cout << texto;
+	do { std::cout << texto;
 		std::cin >> respuesta;
 		for (size_t i{}; i < respuesta.size(); i++)
 			respuesta[i] = tolower(respuesta[i]);
@@ -275,16 +272,14 @@ bool si_no(std::string texto)
 	return true;
 }
 
-int imprimir_menu(std::vector<std::string> opciones)
-{
+int imprimir_menu(std::vector<std::string> opciones) {
 	int r;
 	std::string menu;
 
 	for (size_t i{}; i < opciones.size(); i++)
 		menu += (std::to_string(i + 1) + ") " + opciones[i] + "\n");
 	menu += "\nElige una opcion: ";
-	do
-	{
+	do {
 		r = mientras_no_sea_numero<int>(menu);
 		if (r < 1 || r > static_cast<int>(opciones.size()))
 			no_valido(true);
@@ -293,14 +288,12 @@ int imprimir_menu(std::vector<std::string> opciones)
 	return r;
 }
 
-int cambiar_numero(const std::vector<double> &vect, std::string nombre)
-{
+int cambiar_numero(const std::vector<double> &vect, std::string nombre) {
 	std::string menu{imprimir_vector(vect, nombre, true) + "\nElige una opcion: "};
 	int opcion{};
 	int maximo{static_cast<int>(vect.size())};
 
-	do
-	{
+	do {
 		opcion = mientras_no_sea_numero<int>(menu);
 		if (opcion < 0 || opcion >= maximo)
 			no_valido(true);
@@ -309,16 +302,13 @@ int cambiar_numero(const std::vector<double> &vect, std::string nombre)
 	return opcion;
 }
 
-bool numero(std::string cadena)
-{
+bool numero(std::string cadena) {
 	bool punto{false};
 
-	for (size_t i{}; i < cadena.size(); i++)
-	{
+	for (size_t i{}; i < cadena.size(); i++) {
 		if (i == 0 && (cadena[i] == '-' || cadena[i] == '+'))
 			;
-		else if (cadena[i] == '.')
-		{
+		else if (cadena[i] == '.') {
 			if (punto == true)
 				return false;
 			punto = true;
@@ -326,20 +316,16 @@ bool numero(std::string cadena)
 		else if (!isdigit(cadena[i]))
 			return false;
 	}
-
 	return true;
 }
 
-void no_valido(bool borrar)
-{
+void no_valido(bool borrar) {
 	if (borrar)
 		borrar_pantalla();
-	std::cout << "Ingreso una opcion no valida. Intente de nuevo" << std::endl
-			  << std::endl;
+	std::cout << "Ingreso una opcion no valida. Intente de nuevo" << std::endl << std::endl;
 }
 
-void borrar_pantalla()
-{
+void borrar_pantalla() {
 	// system("cls");
 	system("clear");
 }
@@ -349,6 +335,5 @@ void nombres() {
 	std::cout << "Gómez González Astrid" << std::endl;
 	std::cout << "Márquez Rosas Lemuel Helon" << std::endl;
 	std::cout << "Navarro Ramos Karen" << std::endl;
-	std::cout << "Pérez Romero Jonathan\n\n"
-			  << std::endl;
+	std::cout << "Pérez Romero Jonathan\n\n" << std::endl;
 }
