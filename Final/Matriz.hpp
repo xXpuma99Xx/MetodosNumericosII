@@ -17,7 +17,7 @@ public:
 	std::vector<std::vector<T>> get_matriz();
 	void set_matriz(std::vector<std::vector<T>> m);
 
-	std::string imprimir_tabla_matriz(size_t tamanio = length, size_t precision = length);
+	std::string imprimir_tabla_matriz(size_t tamanio = length);
 	
 	Matriz inversa();
 	Matriz transpuesta();

@@ -19,13 +19,13 @@ void Matriz<T>::set_matriz(std::vector<std::vector<T>> m){
 }
 
 template<class T>
-std::string Matriz<T>::imprimir_tabla_matriz(size_t tamanio, size_t precision){
+std::string Matriz<T>::imprimir_tabla_matriz(size_t tamanio){
 	std::vector<size_t> t;
-	size_t n{obtener_n(matriz)};
+	size_t n{obtener_n<T>(matriz)};
 
 	for(size_t i{};i < n;i++)
 		t.push_back(tamanio);
-	return imprimir_matriz(matriz,t,precision);
+	return imprimir_matriz<T>(matriz,t);
 }
 	
 template<class T>
@@ -87,7 +87,7 @@ template<class T>
 Matriz<T> Matriz<T>::transpuesta(){
 	std::vector<std::vector<T>> transpuesta;
 	size_t filas{matriz.size()};
-	size_t columnas{obtener_n(matriz)};
+	size_t columnas{obtener_n<T>(matriz)};
 
 	for (size_t i{}; i < columnas; i++) {
 		std::vector<T> fila;
@@ -117,7 +117,7 @@ template<class T>
 Matriz<T> Matriz<T>::matriz_x_matriz(std::vector<std::vector<T>> m){
 	std::vector<std::vector<T>> resultado;
 	size_t filas {matriz.size()};
-	size_t columnas {obtener_n(m)};
+	size_t columnas {obtener_n<T>(m)};
 	size_t n {m.size()};
 	
 	for(size_t i{};i < filas;i++){
@@ -144,7 +144,7 @@ template<class T>
 Matriz<T> Matriz<T>::matriz_s_matriz(std::vector<std::vector<T>> m) {
 	std::vector<std::vector<double>> resultado;
 	size_t filas{matriz.size()};
-	size_t columnas{obtener_n(matriz)};
+	size_t columnas{obtener_n<T>(matriz)};
 
 	for(size_t i{};i < filas;i++){
 		std::vector<T> fila;

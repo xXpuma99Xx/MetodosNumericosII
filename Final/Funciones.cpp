@@ -1,6 +1,6 @@
 #include "Funciones.hpp"
 
-std::string imprimir_celda(std::string texto, size_t t, bool centrar){
+std::string imprimir_celda(std::string texto, size_t t, bool centrar) {
 	std::string celda;
 	size_t texto_t{t - texto.size()};
 
@@ -13,7 +13,7 @@ std::string imprimir_celda(std::string texto, size_t t, bool centrar){
 		celda += texto;
 		for(size_t i{};i < derecha;i++)
 			celda += " ";
-	} else{
+	} else {
 		celda += texto;
 		for(size_t i{};i < texto_t;i++)
 			celda += " ";
@@ -21,10 +21,10 @@ std::string imprimir_celda(std::string texto, size_t t, bool centrar){
 	return celda + "|";
 }
 
-std::string linea(size_t t, bool espacios){
+std::string linea(size_t t, bool espacios) {
 	std::string linea;
 
-	for(size_t i{};i < t;i++){
+	for(size_t i{};i < t;i++) {
 		if(espacios)
 			linea += " ";
 		else
@@ -33,7 +33,7 @@ std::string linea(size_t t, bool espacios){
 	return linea;
 }
 
-std::string linea_completa(size_t n,std::vector<size_t> t){
+std::string linea_completa(size_t n,std::vector<size_t> t) {
 	std::string line{"+"};
 
 	for(size_t i{};i < n;i++)

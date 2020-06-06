@@ -24,12 +24,12 @@ void no_valido(bool borrar = true);
 void borrar_pantalla();
 
 template<typename T>
-std::string imprimir_numero(T numero, size_t t = length, size_t p = length){
+std::string imprimir_numero(T numero, size_t t = length){
 	std::stringstream stream;
 	std::string numero_str;
 	size_t aux{};
 
-	stream << std::fixed << std::setprecision(p) << numero;
+	stream << std::fixed << std::setprecision(15) << numero;
 	numero_str = stream.str();
 	for(size_t i{};i < numero_str.size();i++) {
 		if(numero_str[i] == '.'){
@@ -59,9 +59,9 @@ size_t obtener_n(std::vector<std::vector<T>> m){
 }
 
 template<typename T>
-std::string imprimir_tabla(std::vector<std::string> nombres, std::vector<std::vector<T>> datos, std::vector<size_t> t = std::vector<size_t> {},size_t p = length){
+std::string imprimir_tabla(std::vector<std::string> nombres, std::vector<std::vector<T>> datos, std::vector<size_t> t = std::vector<size_t> {}){
 	std::string tabla;
-	size_t n{obtener_n(datos)};
+	size_t n{obtener_n<T>(datos)};
 
 	llenar_t(t,nombres.size());
 	tabla = imprimir_headers(nombres, true, true, t);
@@ -73,11 +73,11 @@ std::string imprimir_tabla(std::vector<std::string> nombres, std::vector<std::ve
 				if(j == 0)
 					renglon += "|";
 				if(renglon[renglon.size() - 1] == '-')
-					renglon += "|" + imprimir_celda(imprimir_numero(datos[j][i],t[j],p),t[j],false);
+					renglon += "|" + imprimir_celda(imprimir_numero<T>(datos[j][i],t[j]),t[j],false);
 				else if(renglon[renglon.size() - 1] == ' ')
-					renglon += "|" + imprimir_celda(imprimir_numero(datos[j][i],t[j],p),t[j],false);
+					renglon += "|" + imprimir_celda(imprimir_numero<T>(datos[j][i],t[j]),t[j],false);
 				else
-					renglon += imprimir_celda(imprimir_numero(datos[j][i],t[j],p),t[j],false);
+					renglon += imprimir_celda(imprimir_numero<T>(datos[j][i],t[j]),t[j],false);
 			} else if(i == datos[j].size()){
 				if(j == 0||renglon[renglon.size() - 1] == ' '||renglon[renglon.size() - 1] == '-')
 					renglon += "+" + linea(t[j]);
@@ -100,8 +100,8 @@ std::string imprimir_tabla(std::vector<std::string> nombres, std::vector<std::ve
 }
 
 template<typename T>
-std::string imprimir_matriz(std::vector<std::vector<T>> m, std::vector<size_t> t = std::vector<size_t> {}, size_t p = length, std::vector<std::string> nombres_h = std::vector<std::string> {}, std::vector<std::string> nombres_v = std::vector<std::string> {}){
-	size_t n {obtener_n(m)};
+std::string imprimir_matriz(std::vector<std::vector<T>> m, std::vector<size_t> t = std::vector<size_t> {}, std::vector<std::string> nombres_h = std::vector<std::string> {}, std::vector<std::string> nombres_v = std::vector<std::string> {}){
+	size_t n {obtener_n<T>(m)};
 	std::string linea;
 	std::string tabla_matriz;
 
@@ -123,9 +123,9 @@ std::string imprimir_matriz(std::vector<std::vector<T>> m, std::vector<size_t> t
 			renglon += "|";
 		for(size_t j{};j < n;j++){
 			if(nombres_v.size())
-				renglon += imprimir_celda(imprimir_numero(m[i][j],t[j + 1],p),t[j + 1],false);
+				renglon += imprimir_celda(imprimir_numero<T>(m[i][j],t[j + 1]),t[j + 1],false);
 			else
-				renglon += imprimir_celda(imprimir_numero(m[i][j],t[j],p),t[j],false);
+				renglon += imprimir_celda(imprimir_numero<T>(m[i][j],t[j]),t[j],false);
 		}
 		tabla_matriz += renglon + "\n" + linea;
 	}
@@ -133,7 +133,7 @@ std::string imprimir_matriz(std::vector<std::vector<T>> m, std::vector<size_t> t
 }
 
 template <typename T>
-std::string imprimir_vector(std::vector<T> v,size_t t = length, size_t p = length, std::string nombre = ""){
+std::string imprimir_vector(std::vector<T> v,size_t t = length, std::string nombre = ""){
 	std::string tabla_vector;
 	std::string linea{linea_completa(1,std::vector<size_t> {t})};
 
@@ -141,7 +141,7 @@ std::string imprimir_vector(std::vector<T> v,size_t t = length, size_t p = lengt
 		tabla_vector += imprimir_headers(std::vector<std::string> {nombre}, false, true, std::vector<size_t> {t}) + "\n";
 	tabla_vector += linea;
 	for(size_t i{};i < v.size();i++){
-		tabla_vector += "|" + imprimir_celda(imprimir_numero(v[i],t,p),t,false) + "\n" + linea;
+		tabla_vector += "|" + imprimir_celda(imprimir_numero<T>(v[i],t),t,false) + "\n" + linea;
 	}
 	return tabla_vector;
 }
